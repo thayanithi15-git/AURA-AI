@@ -547,11 +547,11 @@ export default function VectorAdvisoryPanel({
                 className={`py-3 px-4 rounded-2xl shadow-sm text-sm leading-relaxed ${
                   msg.sender === 'user'
                     ? 'bg-primary-600 text-white rounded-tr-none'
-                    : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-150 border border-slate-200/60 dark:border-slate-700 rounded-tl-none'
+                    : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-200/60 dark:border-slate-700 rounded-tl-none'
                 }`}
               >
                 {msg.text.split('\n').map((line, idx) => (
-                  <p key={idx} className={idx > 0 ? 'mt-2' : ''}>
+                  <p key={idx} className={`${idx > 0 ? 'mt-2' : ''} ${msg.sender === 'user' ? 'text-white' : 'text-slate-800 dark:text-slate-100'}`}>
                     {line}
                   </p>
                 ))}

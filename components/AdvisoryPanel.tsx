@@ -741,7 +741,7 @@ export default function AdvisoryPanel({
                     : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 rounded-tl-none shadow-sm'
                 }`}
               >
-                <p className="text-xs font-medium leading-relaxed whitespace-pre-wrap">{msg.text}</p>
+                <p className={`text-xs font-medium leading-relaxed whitespace-pre-wrap ${msg.sender === 'user' ? 'text-white' : 'text-slate-800 dark:text-slate-100'}`}>{msg.text}</p>
                 {msg.chartData && renderChart(msg.chartData)}
               </div>
               <span className="text-[10px] text-slate-400 dark:text-slate-500 mt-1 block px-1">{msg.timestamp}</span>
