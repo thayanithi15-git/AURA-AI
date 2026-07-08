@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { Settings, Sparkles, RefreshCw, ChevronDown, Globe, Check, Sun, Moon, Palette } from 'lucide-react'
+import { Settings, Sparkles, RefreshCw, ChevronDown, Globe, Check, Sun, Moon, Palette, Menu, X } from 'lucide-react'
 import Avatar from '../../components/Avatar'
 import Customizer, { CustomizerSettings } from '../../components/Customizer'
 import AdvisoryPanel from '../../components/AdvisoryPanel'
@@ -18,6 +18,7 @@ export default function Home() {
   const [langDropdownOpen, setLangDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   // Initialize theme from localStorage or system preference
   useEffect(() => {
@@ -158,10 +159,10 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Action Controls */}
-        <div className="flex items-center gap-3">
+        {/* Action Controls (Desktop) */}
+        <div className="hidden md:flex items-center gap-3">
           {/* Quick Stats (Desktop) */}
-          <div className="hidden md:flex items-center gap-4 text-xs font-semibold px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm text-slate-600 dark:text-slate-300">
+          <div className="flex items-center gap-4 text-xs font-semibold px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm text-slate-600 dark:text-slate-300">
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
               <span className="text-slate-400 dark:text-slate-500 font-medium">Portfolio:</span>
@@ -185,7 +186,7 @@ export default function Home() {
                 {settings.language === 'hi' && 'Hindi (हिंदी)'}
                 {settings.language === 'ta' && 'Tamil (தமிழ்)'}
                 {settings.language === 'te' && 'Telugu (తెలుగు)'}
-                {settings.language === 'kn' && 'Kannada (ಕನ್ನಡ)'}
+                {settings.language === 'kn' && 'Kannada (కನ್ನಡ)'}
               </span>
               <ChevronDown className={`h-4 w-4 opacity-50 transition-transform duration-200 ${langDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
@@ -198,7 +199,7 @@ export default function Home() {
                   { code: 'hi', label: 'Hindi (हिंदी)' },
                   { code: 'ta', label: 'Tamil (தமிழ்)' },
                   { code: 'te', label: 'Telugu (తెలుగు)' },
-                  { code: 'kn', label: 'Kannada (ಕನ್ನಡ)' }
+                  { code: 'kn', label: 'Kannada (కನ್ನಡ)' }
                 ].map((lang) => {
                   const active = settings.language === lang.code
                   return (
@@ -278,13 +279,116 @@ export default function Home() {
             </span>
           </button>
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="flex md:hidden h-9 w-9 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 shadow-sm active:scale-95 transition-all"
+        >
+          {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+        </button>
       </header>
+
+      {/* Mobile Menu Dropdown */}
+      {mobileMenuOpen && (
+        <div className="md:hidden w-full bg-white/95 dark:bg-slate-950/95 border-b border-slate-200 dark:border-slate-800 backdrop-blur-md z-30 shadow-lg px-4 py-4 space-y-4 animate-in slide-in-from-top-2 duration-200">
+          {/* Mobile Quick Stats */}
+          <div className="flex flex-col gap-2 p-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-semibold">
+            <div className="flex items-center justify-between">
+              <span className="text-slate-400 dark:text-slate-500 font-medium">Portfolio:</span>
+              <span className="text-slate-800 dark:text-slate-200">$84,320</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-slate-400 dark:text-slate-500 font-medium">Status:</span>
+              <span className="text-emerald-600 dark:text-emerald-400 font-medium">Balanced Growth</span>
+            </div>
+          </div>
+
+          {/* D-ID Sync Check Mobile Button */}
+          <button
+            onClick={() => {
+              checkDIDStatus();
+              setMobileMenuOpen(false);
+            }}
+            disabled={checkingDID}
+            className="w-full flex h-10 items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 text-sm font-semibold rounded-xl transition-all shadow-sm text-slate-750 dark:text-slate-200 active:scale-95 disabled:opacity-50"
+          >
+            <RefreshCw className={`w-4 h-4 text-primary-500 ${checkingDID ? 'animate-spin' : ''}`} />
+            <span>Check D-ID Sync</span>
+          </button>
+
+          {/* Customize Face Mobile Button */}
+          <button
+            onClick={() => {
+              setCustomizerOpen(true);
+              setMobileMenuOpen(false);
+            }}
+            className="w-full flex h-10 items-center justify-center gap-2 bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 text-sm font-semibold rounded-xl transition-all shadow-sm text-slate-700 dark:text-slate-200 active:scale-95"
+          >
+            <Palette className="w-4 h-4 text-primary-500" />
+            <span>Customize Face</span>
+          </button>
+
+          {/* Theme Switch Toggle in Mobile */}
+          <div className="flex items-center justify-between py-2 border-t border-slate-100 dark:border-slate-900">
+            <span className="text-sm font-semibold text-slate-600 dark:text-slate-3550">Theme Mode</span>
+            <button
+              onClick={toggleDarkMode}
+              className="relative inline-flex h-9 w-[68px] items-center rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300 focus:outline-none shadow-sm cursor-pointer"
+            >
+              <span className="sr-only">Toggle Theme</span>
+              <span className="absolute left-2.5 z-10 pointer-events-none">
+                <Sun className={`h-3.5 w-3.5 transition-all duration-300 ${isDarkMode ? 'text-slate-400 opacity-40 scale-90' : 'text-amber-500 opacity-100 scale-110 rotate-[15deg]'}`} />
+              </span>
+              <span className="absolute right-2.5 z-10 pointer-events-none">
+                <Moon className={`h-3.5 w-3.5 transition-all duration-300 ${isDarkMode ? 'text-indigo-400 opacity-100 scale-110 rotate-[-15deg]' : 'text-slate-400 opacity-40 scale-90'}`} />
+              </span>
+              <span
+                className={`absolute top-[3px] h-7 w-7 rounded-full bg-white dark:bg-slate-950 shadow-md transition-all duration-300 ease-out border border-slate-200/50 dark:border-slate-850 flex items-center justify-center ${
+                  isDarkMode ? 'left-[37px]' : 'left-[3px]'
+                }`}
+              >
+                {isDarkMode ? <Moon className="h-3 w-3 text-indigo-400 animate-pulse" /> : <Sun className="h-3 w-3 text-amber-500" />}
+              </span>
+            </button>
+          </div>
+
+          {/* Language Selection in Mobile */}
+          <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-900">
+            <label className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block">Language</label>
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { code: 'en', label: 'English (US/UK)' },
+                { code: 'hi', label: 'Hindi (हिंदी)' },
+                { code: 'ta', label: 'Tamil (தமிழ்)' },
+                { code: 'te', label: 'Telugu (తెలుగు)' },
+                { code: 'kn', label: 'Kannada (కನ್ನಡ)' }
+              ].map((lang) => {
+                const active = settings.language === lang.code
+                return (
+                  <button
+                    key={lang.code}
+                    onClick={() => setSettings({ ...settings, language: lang.code as any })}
+                    className={`py-2 px-3 text-xs font-semibold rounded-lg border text-center transition-all ${
+                      active
+                        ? 'bg-primary-50 dark:bg-primary-950/30 border-primary-500 text-primary-700 dark:text-primary-400 shadow-sm'
+                        : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50'
+                    }`}
+                  >
+                    {lang.label}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main Section */}
       <div className="flex-1 w-full max-w-7xl mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 z-10 lg:overflow-hidden overflow-y-visible h-auto lg:h-[calc(100vh-160px)] lg:max-h-[660px]">
 
         {/* Left Column: Fullscreen AI Avatar display */}
-        <div className="lg:col-span-5 flex flex-col justify-between items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 min-h-[450px] lg:h-full group shadow-lg dark:shadow-black/30">
+        <div className="lg:col-span-5 flex flex-col justify-between items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 min-h-[320px] sm:min-h-[450px] lg:h-full group shadow-lg dark:shadow-black/30">
           {/* Top Row: Scientific HUD info & Secure Link */}
           <div className="w-full flex justify-between items-center mb-4">
             <div className="text-[10px] text-slate-400 dark:text-slate-500 font-mono space-y-1">

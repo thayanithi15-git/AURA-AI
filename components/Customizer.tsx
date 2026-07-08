@@ -100,7 +100,7 @@ export default function Customizer({
       <div className="flex-1 overflow-y-auto p-6 space-y-8">
         {/* Avatar Engine Mode */}
         <div className="space-y-4">
-          <div className="flex items-center gap-2 text-slate-600 text-xs font-semibold uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
             <Sliders className="w-4 h-4 text-primary-500" />
             <span>Avatar Engine Mode</span>
           </div>
@@ -109,8 +109,8 @@ export default function Customizer({
               onClick={() => updateSetting('avatarSource', 'vector')}
               className={`py-2 px-3 text-xs font-bold rounded-xl border transition-all duration-200 ${
                 settings.avatarSource === 'vector'
-                  ? 'bg-primary-50 border-primary-500 text-primary-700 shadow-sm'
-                  : 'bg-slate-50/50 border-slate-200 text-slate-600 hover:border-slate-300'
+                  ? 'bg-primary-50 dark:bg-primary-950/30 border-primary-500 text-primary-700 dark:text-primary-400 shadow-sm'
+                  : 'bg-slate-50/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700'
               }`}
             >
               Interactive SVG Face
@@ -119,8 +119,8 @@ export default function Customizer({
               onClick={() => updateSetting('avatarSource', 'did')}
               className={`py-2 px-3 text-xs font-bold rounded-xl border transition-all duration-200 ${
                 settings.avatarSource === 'did'
-                  ? 'bg-primary-50 border-primary-500 text-primary-700 shadow-sm'
-                  : 'bg-slate-50/50 border-slate-200 text-slate-600 hover:border-slate-300'
+                  ? 'bg-primary-50 dark:bg-primary-950/30 border-primary-500 text-primary-700 dark:text-primary-400 shadow-sm'
+                  : 'bg-slate-50/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700'
               }`}
             >
               D-ID AI Avatar
@@ -130,17 +130,17 @@ export default function Customizer({
 
         {settings.avatarSource === 'did' ? (
           /* D-ID Avatar Config Panel */
-          <div className="space-y-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-            <div className="flex items-center gap-2 text-slate-600 text-xs font-semibold uppercase tracking-wider">
+          <div className="space-y-4 bg-slate-50 dark:bg-slate-850 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
+            <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
               <User className="w-4 h-4 text-primary-500" />
               <span>D-ID Avatar Configuration</span>
             </div>
             <div className="space-y-2">
-              <p className="text-[11px] font-medium text-slate-600 leading-relaxed">
+              <p className="text-[11px] font-medium text-slate-600 dark:text-slate-400 leading-relaxed">
                 AURA is synced with D-ID's video generation engine. When you send messages, AURA will automatically speak and generate realistic talking video animations.
               </p>
               {settings.didVideoUrl && (
-                <div className="mt-2 p-2.5 bg-emerald-50 border border-emerald-100 rounded-lg text-[10px] text-emerald-700 font-mono break-all">
+                <div className="mt-2 p-2.5 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-100 dark:border-emerald-900/50 rounded-lg text-[10px] text-emerald-700 dark:text-emerald-400 font-mono break-all">
                   Active Video: {settings.didVideoUrl.substring(0, 50)}...
                 </div>
               )}
@@ -151,7 +151,7 @@ export default function Customizer({
           <>
             {/* Character Selection */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-slate-600 text-xs font-semibold uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
                 <Sliders className="w-4 h-4 text-primary-500" />
                 <span>Character Gender</span>
               </div>
@@ -160,8 +160,8 @@ export default function Customizer({
                   onClick={() => updateSetting('gender', 'male')}
                   className={`py-2 px-3 text-xs font-semibold rounded-xl border transition-all duration-200 ${
                     settings.gender === 'male'
-                      ? 'bg-primary-50 border-primary-500 text-primary-700 shadow-sm'
-                      : 'bg-slate-50/50 border-slate-200 text-slate-600 hover:border-slate-300'
+                      ? 'bg-primary-50 dark:bg-primary-950/30 border-primary-500 text-primary-700 dark:text-primary-400 shadow-sm'
+                      : 'bg-slate-50/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700'
                   }`}
                 >
                   Male Advisor
@@ -170,8 +170,8 @@ export default function Customizer({
                   onClick={() => updateSetting('gender', 'female')}
                   className={`py-2 px-3 text-xs font-semibold rounded-xl border transition-all duration-200 ${
                     settings.gender === 'female'
-                      ? 'bg-primary-50 border-primary-500 text-primary-700 shadow-sm'
-                      : 'bg-slate-50/50 border-slate-200 text-slate-600 hover:border-slate-300'
+                      ? 'bg-primary-50 dark:bg-primary-950/30 border-primary-500 text-primary-700 dark:text-primary-400 shadow-sm'
+                      : 'bg-slate-50/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700'
                   }`}
                 >
                   Female Advisor
@@ -181,7 +181,7 @@ export default function Customizer({
 
             {/* AI Provider Selection */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-slate-600 text-xs font-semibold uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
                 <Sliders className="w-4 h-4 text-primary-500" />
                 <span>AI Response Provider</span>
               </div>
@@ -196,8 +196,8 @@ export default function Customizer({
                     onClick={() => updateSetting('aiProvider', option.value)}
                     className={`py-2 px-3 text-xs font-semibold rounded-xl border transition-all duration-200 ${
                       settings.aiProvider === option.value
-                        ? 'bg-primary-50 border-primary-500 text-primary-700 shadow-sm'
-                        : 'bg-slate-50/50 border-slate-200 text-slate-600 hover:border-slate-300'
+                        ? 'bg-primary-50 dark:bg-primary-950/30 border-primary-500 text-primary-700 dark:text-primary-400 shadow-sm'
+                        : 'bg-slate-50/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700'
                     }`}
                   >
                     {option.label}
@@ -208,7 +208,7 @@ export default function Customizer({
 
             {/* Style Selection */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-slate-600 text-xs font-semibold uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
                 <Sliders className="w-4 h-4 text-primary-500" />
                 <span>HUD Hologram Mode</span>
               </div>
@@ -226,8 +226,8 @@ export default function Customizer({
                       onClick={() => updateSetting('hairStyle', style)}
                       className={`py-2 px-3 text-xs font-medium rounded-xl border transition-all duration-200 capitalize ${
                         settings.hairStyle === style
-                          ? 'bg-primary-50 border-primary-500 text-primary-700 shadow-sm'
-                          : 'bg-slate-50/50 border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-800'
+                          ? 'bg-primary-50 dark:bg-primary-950/30 border-primary-500 text-primary-700 dark:text-primary-400 shadow-sm'
+                          : 'bg-slate-50/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700 hover:text-slate-800 dark:hover:text-slate-200'
                       }`}
                     >
                       {label}
@@ -239,7 +239,7 @@ export default function Customizer({
 
             {/* Skin Tone/Chassis Color */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-slate-600 text-xs font-semibold uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
                 <Palette className="w-4 h-4 text-primary-500" />
                 <span>Secondary Ring Glow</span>
               </div>
@@ -250,8 +250,8 @@ export default function Customizer({
                     onClick={() => updateSetting('skinColor', skin.value)}
                     className={`flex flex-col items-center gap-1.5 p-2.5 rounded-xl border transition-all duration-200 ${
                       settings.skinColor === skin.value
-                        ? 'bg-primary-50 border-primary-500 text-slate-900 shadow-sm'
-                        : 'bg-slate-50/50 border-slate-200 text-slate-500 hover:border-slate-300'
+                        ? 'bg-primary-50 dark:bg-primary-950/30 border-primary-500 text-slate-900 dark:text-slate-100 shadow-sm'
+                        : 'bg-slate-50/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700'
                     }`}
                   >
                     <span 
@@ -266,12 +266,12 @@ export default function Customizer({
 
             {/* Hair Color */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-slate-600 text-xs font-semibold uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
                 <Palette className="w-4 h-4 text-primary-500" />
                 <span>HUD Accent Laser Color</span>
               </div>
               {settings.hairStyle === 'bald' ? (
-                <p className="text-xs text-slate-400 italic">Select a HUD mode to modify lasers.</p>
+                <p className="text-xs text-slate-400 dark:text-slate-500 italic">Select a HUD mode to modify lasers.</p>
               ) : (
                 <div className="grid grid-cols-3 gap-2">
                   {PRESET_HAIRS.map((hair) => (
@@ -280,8 +280,8 @@ export default function Customizer({
                       onClick={() => updateSetting('hairColor', hair.value)}
                       className={`flex flex-col items-center gap-1.5 p-2.5 rounded-xl border transition-all duration-200 ${
                         settings.hairColor === hair.value
-                          ? 'bg-primary-50 border-primary-500 text-slate-900 shadow-sm'
-                          : 'bg-slate-50/50 border-slate-200 text-slate-500 hover:border-slate-300'
+                          ? 'bg-primary-50 dark:bg-primary-950/30 border-primary-500 text-slate-900 dark:text-slate-100 shadow-sm'
+                          : 'bg-slate-50/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700'
                       }`}
                     >
                       <span 
@@ -297,7 +297,7 @@ export default function Customizer({
 
             {/* Eye/Sensors Color */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-slate-600 text-xs font-semibold uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
                 <Palette className="w-4 h-4 text-primary-500" />
                 <span>AI Sensor Eye Color</span>
               </div>
@@ -308,8 +308,8 @@ export default function Customizer({
                     onClick={() => updateSetting('eyeColor', eye.value)}
                     className={`flex flex-col items-center gap-1.5 p-2.5 rounded-xl border transition-all duration-200 ${
                       settings.eyeColor === eye.value
-                        ? 'bg-primary-50 border-primary-500 text-slate-900 shadow-sm'
-                        : 'bg-slate-50/50 border-slate-200 text-slate-500 hover:border-slate-300'
+                        ? 'bg-primary-50 dark:bg-primary-950/30 border-primary-500 text-slate-900 dark:text-slate-100 shadow-sm'
+                        : 'bg-slate-50/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700'
                     }`}
                   >
                     <span 
@@ -325,21 +325,21 @@ export default function Customizer({
         )}
 
         {/* Voice Parameters */}
-        <div className="space-y-6 pt-6 border-t border-slate-100">
-          <div className="flex items-center gap-2 text-slate-600 text-xs font-semibold uppercase tracking-wider">
+        <div className="space-y-6 pt-6 border-t border-slate-100 dark:border-slate-800">
+          <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
             <Volume2 className="w-4 h-4 text-primary-500" />
             <span>Voice &amp; Language</span>
           </div>
 
           <div className="space-y-2">
-            <label className="block text-xs font-bold text-slate-500">Language (AURA Output)</label>
+            <label className="block text-xs font-bold text-slate-50500 dark:text-slate-400">Language (AURA Output)</label>
             <div className="grid grid-cols-2 gap-2">
               {[
                 { code: 'en', label: 'English', flag: '🇺🇸' },
                 { code: 'hi', label: 'Hindi (हिंदी)', flag: '🇮🇳' },
                 { code: 'ta', label: 'Tamil (தமிழ்)', flag: '🇮🇳' },
                 { code: 'te', label: 'Telugu (తెలుగు)', flag: '🇮🇳' },
-                { code: 'kn', label: 'Kannada (ಕನ್ನಡ)', flag: '🇮🇳' }
+                { code: 'kn', label: 'Kannada (కನ್ನಡ)', flag: '🇮🇳' }
               ].map((lang) => {
                 const active = settings.language === lang.code
                 return (
@@ -348,8 +348,8 @@ export default function Customizer({
                     onClick={() => updateSetting('language', lang.code)}
                     className={`py-2.5 px-3 rounded-xl border text-xs font-bold transition-all duration-200 flex items-center gap-2 active:scale-95 ${
                       active
-                        ? 'bg-primary-50 border-primary-300 text-primary-700 shadow-sm'
-                        : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                        ? 'bg-primary-50 dark:bg-primary-950/30 border-primary-300 dark:border-primary-800 text-primary-700 dark:text-primary-450 shadow-sm'
+                        : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'
                     }`}
                   >
                     <span className="text-sm">{lang.flag}</span>
@@ -361,11 +361,11 @@ export default function Customizer({
           </div>
 
           <div className="space-y-2">
-            <label className="block text-xs font-bold text-slate-500">Choose Voice Type</label>
+            <label className="block text-xs font-bold text-slate-500 dark:text-slate-400">Choose Voice Type</label>
             <select
               value={settings.voiceName}
               onChange={(e) => updateSetting('voiceName', e.target.value)}
-              className="w-full py-2.5 px-3 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all font-semibold"
+              className="w-full py-2.5 px-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all font-semibold"
               suppressHydrationWarning={true}
             >
               <option value="">System Default</option>
@@ -378,9 +378,9 @@ export default function Customizer({
           </div>
 
           <div className="space-y-2">
-            <div className="flex justify-between text-xs font-bold text-slate-500">
+            <div className="flex justify-between text-xs font-bold text-slate-500 dark:text-slate-400">
               <span>Voice Pitch: {settings.voicePitch.toFixed(1)}</span>
-              <span className="text-slate-400">Futuristic / Natural</span>
+              <span className="text-slate-400 dark:text-slate-500">Futuristic / Natural</span>
             </div>
             <input
               type="range"
@@ -389,14 +389,14 @@ export default function Customizer({
               step="0.1"
               value={settings.voicePitch}
               onChange={(e) => updateSetting('voicePitch', parseFloat(e.target.value))}
-              className="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-primary-600"
+              className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary-600"
             />
           </div>
 
           <div className="space-y-2">
-            <div className="flex justify-between text-xs font-bold text-slate-500">
+            <div className="flex justify-between text-xs font-bold text-slate-500 dark:text-slate-400">
               <span>Speech Rate: {settings.voiceRate.toFixed(1)}x</span>
-              <span className="text-slate-400">Steady / Fast</span>
+              <span className="text-slate-400 dark:text-slate-500">Steady / Fast</span>
             </div>
             <input
               type="range"
@@ -405,14 +405,14 @@ export default function Customizer({
               step="0.1"
               value={settings.voiceRate}
               onChange={(e) => updateSetting('voiceRate', parseFloat(e.target.value))}
-              className="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-primary-600"
+              className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary-600"
             />
           </div>
         </div>
       </div>
 
       {/* Footer / Reset option */}
-      <div className="p-6 border-t border-slate-100 bg-slate-50 flex gap-3">
+      <div className="p-6 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex gap-3">
         <button
           onClick={() => onChange({
             skinColor: '#e5b88c',
@@ -428,7 +428,7 @@ export default function Customizer({
             didVideoUrl: '',
             aiProvider: 'gemini',
           })}
-          className="flex-1 py-3 text-center text-xs font-bold text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-100 border border-slate-200 rounded-xl transition-all"
+          className="flex-1 py-3 text-center text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl transition-all"
         >
           Reset to Default
         </button>

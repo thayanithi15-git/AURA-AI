@@ -415,7 +415,7 @@ export default function VectorAdvisoryPanel({
             const pct = (chart.values[idx] / maxValue) * 100
             return (
               <div key={idx} className="space-y-1">
-                <div className="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-20500">
+                <div className="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-200">
                   <span className="text-slate-700 dark:text-slate-300">{lbl}</span>
                   <span className="text-slate-800 dark:text-slate-200">{chart.values[idx]}%</span>
                 </div>
