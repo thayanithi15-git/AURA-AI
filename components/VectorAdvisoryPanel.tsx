@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
-import { Send, Sparkles, TrendingUp, BarChart3, DollarSign, VolumeX, Volume2, User, Bot, Mic, MicOff, Key, HelpCircle } from 'lucide-react'
+import { Send, Sparkles, TrendingUp, BarChart3, DollarSign, VolumeX, Volume2, User, Bot, Mic, MicOff, Key, HelpCircle, Terminal } from 'lucide-react'
 import type { AIProvider } from './Customizer'
 
 interface Message {
@@ -376,7 +376,7 @@ export default function VectorAdvisoryPanel({
       })
 
       return (
-        <div className="mt-4 p-4 bg-white rounded-2xl border border-slate-200 flex flex-col md:flex-row items-center gap-4 animate-fade-in">
+        <div className="mt-4 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col md:flex-row items-center gap-4 animate-fade-in">
           <div className="relative w-28 h-28 flex-shrink-0 animate-scale-in">
             <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
               {coordinates.map((path, idx) => (
@@ -387,17 +387,17 @@ export default function VectorAdvisoryPanel({
                   className="transition-all duration-300 hover:opacity-85"
                 />
               ))}
-              <circle cx="50" cy="50" r="22" fill="#ffffff" />
+              <circle cx="50" cy="50" r="22" className="fill-white dark:fill-slate-800" />
             </svg>
           </div>
           <div className="flex-1 grid grid-cols-2 gap-2 text-xs">
             {chart.labels.map((lbl, idx) => (
-              <div key={idx} className="flex items-center gap-1.5 text-slate-600">
+              <div key={idx} className="flex items-center gap-1.5 text-slate-600 dark:text-slate-350">
                 <span
                   className="w-2.5 h-2.5 rounded-full"
                   style={{ backgroundColor: chart.colors?.[idx] }}
                 />
-                <span className="truncate">
+                <span className="truncate text-slate-700 dark:text-slate-300">
                   {lbl}: {chart.values[idx]}%
                 </span>
               </div>
@@ -410,16 +410,16 @@ export default function VectorAdvisoryPanel({
     if (chart.type === 'bar') {
       const maxValue = Math.max(...chart.values)
       return (
-        <div className="mt-4 p-4 bg-white rounded-2xl border border-slate-200 space-y-3 animate-fade-in">
+        <div className="mt-4 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3 animate-fade-in">
           {chart.labels.map((lbl, idx) => {
             const pct = (chart.values[idx] / maxValue) * 100
             return (
               <div key={idx} className="space-y-1">
-                <div className="flex justify-between text-xs font-semibold text-slate-700">
-                  <span>{lbl}</span>
-                  <span>{chart.values[idx]}%</span>
+                <div className="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-20500">
+                  <span className="text-slate-700 dark:text-slate-300">{lbl}</span>
+                  <span className="text-slate-800 dark:text-slate-200">{chart.values[idx]}%</span>
                 </div>
-                <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-slate-100 dark:bg-slate-900 rounded-full overflow-hidden">
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{
@@ -448,7 +448,7 @@ export default function VectorAdvisoryPanel({
         .join(' ')
 
       return (
-        <div className="mt-4 p-4 bg-white rounded-2xl border border-slate-200 animate-fade-in">
+        <div className="mt-4 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 animate-fade-in">
           <div className="w-full h-32 relative">
             <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none">
               <polyline
@@ -460,7 +460,7 @@ export default function VectorAdvisoryPanel({
               />
             </svg>
           </div>
-          <div className="flex justify-between text-[10px] text-slate-400 mt-2 px-1 font-mono uppercase tracking-widest">
+          <div className="flex justify-between text-[10px] text-slate-400 dark:text-slate-500 mt-2 px-1 font-mono uppercase tracking-widest">
             {chart.labels.map((lbl, idx) => (
               <span key={idx}>{lbl}</span>
             ))}
@@ -473,15 +473,15 @@ export default function VectorAdvisoryPanel({
   }
 
   return (
-    <div className="h-full flex flex-col bg-slate-50 border border-slate-200 rounded-3xl overflow-hidden shadow-lg font-sans relative">
+    <div className="h-full flex flex-col bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-lg font-sans relative">
       {/* HUD Accents */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 via-indigo-500 to-primary-600 opacity-20" />
 
       {/* Header bar */}
-      <div className="p-4 bg-white border-b border-slate-200 flex items-center justify-between z-10">
+      <div className="p-4 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between z-10">
         <div className="flex items-center gap-2">
-          <div className="w-2.5 h-2.5 rounded-full bg-primary-500 animate-ping" />
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 font-mono">
+          <Terminal className="w-4 h-4 text-primary-500 animate-pulse" />
+          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 font-mono">
             AURA Advisory Terminal
           </h3>
         </div>
@@ -496,7 +496,7 @@ export default function VectorAdvisoryPanel({
               }
             }}
             className={`p-2 rounded-xl transition-all ${
-              isVoiceMuted ? 'bg-rose-50 text-rose-600 border border-rose-200' : 'bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-700'
+              isVoiceMuted ? 'bg-rose-50 dark:bg-rose-950/20 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50' : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 hover:text-slate-700 dark:text-slate-450 dark:hover:text-slate-200 border border-transparent'
             }`}
             title={isVoiceMuted ? 'Unmute voice synthesiser' : 'Mute voice synthesiser'}
           >
@@ -506,24 +506,24 @@ export default function VectorAdvisoryPanel({
       </div>
 
       {/* Suggestion HUD */}
-      <div className="px-4 py-2 bg-slate-50/50 border-b border-slate-200/50 flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-none z-10">
+      <div className="px-4 py-2 bg-slate-50/50 dark:bg-slate-950/50 border-b border-slate-200/50 dark:border-slate-850 flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-none z-10">
         <button
           onClick={() => handleSendDirect('How is my spending?')}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200/60 hover:bg-slate-50 hover:border-slate-300 rounded-xl text-[10px] font-semibold text-slate-600 transition-all active:scale-95 shadow-sm"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-850 rounded-xl text-[10px] font-semibold text-slate-600 dark:text-slate-300 transition-all active:scale-95 shadow-sm"
         >
           <DollarSign className="w-3 h-3 text-primary-500" />
           <span>Check Spending</span>
         </button>
         <button
           onClick={() => handleSendDirect('Recommend an investment portfolio')}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200/60 hover:bg-slate-50 hover:border-slate-300 rounded-xl text-[10px] font-semibold text-slate-600 transition-all active:scale-95 shadow-sm"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-850 rounded-xl text-[10px] font-semibold text-slate-600 dark:text-slate-300 transition-all active:scale-95 shadow-sm"
         >
           <TrendingUp className="w-3 h-3 text-primary-500" />
           <span>Recommend Portfolio</span>
         </button>
         <button
           onClick={() => handleSendDirect('Show my wealth projection')}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200/60 hover:bg-slate-50 hover:border-slate-300 rounded-xl text-[10px] font-semibold text-slate-600 transition-all active:scale-95 shadow-sm"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-850 rounded-xl text-[10px] font-semibold text-slate-600 dark:text-slate-300 transition-all active:scale-95 shadow-sm"
         >
           <BarChart3 className="w-3 h-3 text-primary-500" />
           <span>Wealth Projection</span>
@@ -531,14 +531,14 @@ export default function VectorAdvisoryPanel({
       </div>
 
       {/* Messages Thread */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 font-sans">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 font-sans bg-slate-50/30 dark:bg-slate-950/10">
         {messages.map((msg) => (
           <div
             key={msg.id}
             className={`flex items-start gap-3 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}
           >
             {msg.sender === 'bot' && (
-              <div className="w-8 h-8 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5">
+              <div className="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5">
                 <Bot className="w-4 h-4 text-primary-500" />
               </div>
             )}
@@ -547,7 +547,7 @@ export default function VectorAdvisoryPanel({
                 className={`py-3 px-4 rounded-2xl shadow-sm text-sm leading-relaxed ${
                   msg.sender === 'user'
                     ? 'bg-primary-600 text-white rounded-tr-none'
-                    : 'bg-white text-slate-800 border border-slate-200/60 rounded-tl-none'
+                    : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-150 border border-slate-200/60 dark:border-slate-700 rounded-tl-none'
                 }`}
               >
                 {msg.text.split('\n').map((line, idx) => (
@@ -557,13 +557,13 @@ export default function VectorAdvisoryPanel({
                 ))}
                 {renderChart(msg.chartData)}
               </div>
-              <span className={`text-[9px] text-slate-400 font-mono tracking-wider px-1 ${msg.sender === 'user' ? 'text-right' : 'text-left'}`}>
+              <span className={`text-[9px] text-slate-400 dark:text-slate-500 font-mono tracking-wider px-1 ${msg.sender === 'user' ? 'text-right' : 'text-left'}`}>
                 {msg.timestamp}
               </span>
             </div>
             {msg.sender === 'user' && (
-              <div className="w-8 h-8 rounded-xl bg-primary-50 border border-primary-100 flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5">
-                <User className="w-4 h-4 text-primary-600" />
+              <div className="w-8 h-8 rounded-xl bg-primary-50 dark:bg-primary-950/20 border border-primary-100 dark:border-primary-900/50 flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5">
+                <User className="w-4 h-4 text-primary-600 dark:text-primary-400" />
               </div>
             )}
           </div>
@@ -572,13 +572,13 @@ export default function VectorAdvisoryPanel({
       </div>
 
       {/* Footer Input Bar */}
-      <form onSubmit={handleSend} className="p-4 bg-white border-t border-slate-200 flex gap-3 items-center z-10">
+      <form onSubmit={handleSend} className="p-4 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-850 flex gap-3 items-center z-10">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask AURA a question..."
-          className="flex-1 py-2.5 px-4 bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 rounded-xl text-sm transition-all"
+          className="flex-1 py-2.5 px-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 rounded-xl text-sm transition-all"
         />
 
         {/* Mic Toggle Button */}
@@ -586,7 +586,7 @@ export default function VectorAdvisoryPanel({
           type="button"
           onClick={toggleListening}
           className={`p-2.5 rounded-xl transition-all active:scale-95 ${
-            isListening ? 'bg-primary-50 text-primary-600 border border-primary-200 animate-pulse' : 'bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-400 hover:text-slate-600'
+            isListening ? 'bg-primary-50 dark:bg-primary-950/20 text-primary-600 dark:text-primary-400 border border-primary-200 dark:border-primary-800 animate-pulse' : 'bg-slate-50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-350'
           }`}
           title={isListening ? 'Speech Recognition Active' : 'Start Speech Input'}
         >
@@ -596,7 +596,7 @@ export default function VectorAdvisoryPanel({
         {/* Send Button */}
         <button
           type="submit"
-          className="p-2.5 bg-primary-600 hover:bg-primary-500 text-white rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center"
+          className="p-2.5 bg-primary-600 hover:bg-primary-500 text-white rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center animate-pulse-glow"
         >
           <Send className="w-4.5 h-4.5" />
         </button>

@@ -54,14 +54,15 @@ async function callGemini(prompt: string, history: MessageEntry[], language: str
 }
 
 async function callGroq(prompt: string, history: MessageEntry[], language: string, apiKey?: string) {
-  const key = apiKey || process.env.GROQ_API_KEY
+  // Use client API key only if it is a Groq key, otherwise default to env variable
+  const key = (apiKey && apiKey.startsWith('gsk_') ? apiKey : undefined) || process.env.NEXT_PUBLIC_GROQ_API_KEY || process.env.GROQ_API_KEY
   if (!key) {
     throw new Error('Groq API key is not configured')
   }
 
   const messages = [
     ...history.map((msg) => ({
-      role: msg.role,
+      role: msg.role === 'model' ? ('assistant' as const) : (msg.role as 'user' | 'system'),
       content: msg.content.replace(/🔑.*/g, ''),
     })),
     {

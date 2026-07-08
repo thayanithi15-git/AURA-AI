@@ -426,6 +426,7 @@ export default function Customizer({
             language: 'en',
             avatarSource: 'vector',
             didVideoUrl: '',
+            aiProvider: 'gemini',
           })}
           className="flex-1 py-3 text-center text-xs font-bold text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-100 border border-slate-200 rounded-xl transition-all"
         >
