@@ -782,7 +782,7 @@ export default function AdvisoryPanel({
         <button
           type="button"
           onClick={toggleListening}
-          className={`p-3 rounded-xl border transition-all duration-200 ${
+          className={`p-3 rounded-xl border transition-all duration-200 flex-shrink-0 ${
             isListening
               ? 'bg-rose-600 border-rose-500 text-white animate-pulse'
               : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-slate-800 hover:bg-slate-100 dark:hover:bg-slate-850'
@@ -797,13 +797,13 @@ export default function AdvisoryPanel({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={isListening ? 'Listening to voice...' : 'Ask AURA about wealth, savings, portfolios...'}
-          className="flex-1 py-3 px-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:bg-white dark:focus:bg-slate-850 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 rounded-xl text-xs font-medium text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all"
+          className="flex-1 min-w-0 py-3 px-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:bg-white dark:focus:bg-slate-850 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 rounded-xl text-xs font-medium text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all"
         />
 
         <button
           type="submit"
           disabled={!input.trim()}
-          className="p-3 bg-primary-600 hover:bg-primary-500 disabled:opacity-40 disabled:hover:bg-primary-600 rounded-xl text-white shadow-lg transition-all"
+          className="p-3 bg-primary-600 hover:bg-primary-500 disabled:opacity-40 disabled:hover:bg-primary-600 rounded-xl text-white shadow-lg transition-all flex-shrink-0"
         >
           <Send className="w-4 h-4" />
         </button>

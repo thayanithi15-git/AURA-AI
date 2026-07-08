@@ -578,14 +578,14 @@ export default function VectorAdvisoryPanel({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask AURA a question..."
-          className="flex-1 py-2.5 px-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 rounded-xl text-sm transition-all"
+          className="flex-1 min-w-0 py-2.5 px-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 rounded-xl text-sm transition-all"
         />
 
         {/* Mic Toggle Button */}
         <button
           type="button"
           onClick={toggleListening}
-          className={`p-2.5 rounded-xl transition-all active:scale-95 ${
+          className={`p-2.5 rounded-xl transition-all active:scale-95 flex-shrink-0 ${
             isListening ? 'bg-primary-50 dark:bg-primary-950/20 text-primary-600 dark:text-primary-400 border border-primary-200 dark:border-primary-800 animate-pulse' : 'bg-slate-50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-350'
           }`}
           title={isListening ? 'Speech Recognition Active' : 'Start Speech Input'}
@@ -596,7 +596,7 @@ export default function VectorAdvisoryPanel({
         {/* Send Button */}
         <button
           type="submit"
-          className="p-2.5 bg-primary-600 hover:bg-primary-500 text-white rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center animate-pulse-glow"
+          className="p-2.5 bg-primary-600 hover:bg-primary-500 text-white rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center animate-pulse-glow flex-shrink-0"
         >
           <Send className="w-5 h-5" />
         </button>
