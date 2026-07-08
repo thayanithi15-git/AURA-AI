@@ -110,24 +110,24 @@ export default function VectorAdvisorPage() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-60 pointer-events-none" />
 
       {/* Main Header */}
-      <header className="w-full px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md flex items-center justify-between z-20 shadow-sm">
-        <div className="flex items-center gap-3">
-          <img src="/logo.png" alt="AURA Logo" className="w-12 mb-2 h-12 rounded-lg object-contain shadow-sm border border-slate-100 dark:border-slate-800" />
+      <header className="w-full px-4 py-3 md:px-6 md:py-4 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md flex items-center justify-between z-20 shadow-sm">
+        <div className="flex items-center gap-2 md:gap-3">
+          <img src="/logo.png" alt="AURA Logo" className="w-10 h-10 md:w-12 md:h-12 rounded-lg object-contain shadow-sm border border-slate-100 dark:border-slate-800" />
           <div>
             <div className="flex items-center gap-1.5">
-              <h1 className="font-extrabold text-lg tracking-wider text-slate-800 dark:text-slate-100">
+              <h1 className="font-extrabold text-base md:text-lg tracking-wider text-slate-800 dark:text-slate-100">
                 AURA
               </h1>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-primary-600 bg-primary-50 px-1.5 py-0.5 rounded border border-primary-200 dark:bg-primary-950/30 dark:text-primary-400 dark:border-primary-800">
+              <span className="text-[9px] md:text-[10px] uppercase font-bold tracking-widest text-primary-600 bg-primary-50 px-1.5 py-0.5 rounded border border-primary-200 dark:bg-primary-950/30 dark:text-primary-400 dark:border-primary-800">
                 Core v1.2
               </span>
             </div>
-            <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Digital Wealth Management Advisory</p>
+            <p className="text-[10px] md:text-[11px] text-slate-500 dark:text-slate-400 font-medium hidden sm:block">Digital Wealth Management Advisory</p>
           </div>
         </div>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 md:gap-3">
           {/* Quick Stats (Desktop) */}
           <div className="hidden md:flex items-center gap-4 text-xs font-semibold px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm text-slate-600 dark:text-slate-300">
             <div className="flex items-center gap-1.5">
@@ -146,16 +146,19 @@ export default function VectorAdvisorPage() {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-              className="flex h-9 w-[190px] items-center justify-between rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-20500 dark:text-slate-200 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-850 focus:outline-none transition-all active:scale-[0.98]"
+              className="flex h-9 w-10 md:w-[190px] items-center justify-center md:justify-between rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 md:px-3 md:py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-850 focus:outline-none transition-all active:scale-[0.98]"
             >
-              <span className="truncate">
+              <span className="hidden md:inline truncate">
                 {settings.language === 'en' && 'English (US/UK)'}
                 {settings.language === 'hi' && 'Hindi (हिंदी)'}
                 {settings.language === 'ta' && 'Tamil (தமிழ்)'}
                 {settings.language === 'te' && 'Telugu (తెలుగు)'}
                 {settings.language === 'kn' && 'Kannada (కನ್ನಡ)'}
               </span>
-              <ChevronDown className={`h-4 w-4 opacity-50 transition-transform duration-200 ${langDropdownOpen ? 'rotate-180' : ''}`} />
+              <span className="md:hidden flex items-center">
+                <Globe className="h-4 w-4 text-slate-500 dark:text-slate-400" />
+              </span>
+              <ChevronDown className="hidden md:inline h-4 w-4 opacity-50 transition-transform duration-200" style={{ transform: langDropdownOpen ? 'rotate(180deg)' : 'none' }} />
             </button>
 
             {langDropdownOpen && (
@@ -198,10 +201,10 @@ export default function VectorAdvisorPage() {
           <button
             onClick={() => setCustomizerOpen(true)}
             suppressHydrationWarning={true}
-            className="flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 text-sm font-semibold rounded-xl transition-all shadow-sm text-slate-700 dark:text-slate-200 active:scale-95"
+            className="flex h-9 w-10 md:w-auto items-center justify-center gap-2 md:px-4 md:py-2.5 bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 text-sm font-semibold rounded-lg md:rounded-xl transition-all shadow-sm text-slate-700 dark:text-slate-200 active:scale-95"
           >
             <Settings className="w-4 h-4 text-primary-500" />
-            <span>Customize Face</span>
+            <span className="hidden md:inline">Customize Face</span>
           </button>
 
           {/* Theme Switch Toggle */}
@@ -219,7 +222,7 @@ export default function VectorAdvisorPage() {
             
             {/* Right Moon Icon */}
             <span className="absolute right-2.5 z-10 pointer-events-none">
-              <Moon className={`h-3.5 w-3.5 transition-all duration-300 ${isDarkMode ? 'text-indigo-450 text-indigo-400 opacity-100 scale-110 rotate-[-15deg]' : 'text-slate-400 opacity-40 scale-90'}`} />
+              <Moon className={`h-3.5 w-3.5 transition-all duration-300 ${isDarkMode ? 'text-indigo-400 opacity-100 scale-110 rotate-[-15deg]' : 'text-slate-400 opacity-40 scale-90'}`} />
             </span>
             
             {/* Floating Thumb */}
