@@ -590,7 +590,7 @@ export default function VectorAdvisoryPanel({
           }`}
           title={isListening ? 'Speech Recognition Active' : 'Start Speech Input'}
         >
-          {isListening ? <Mic className="w-4.5 h-4.5" /> : <MicOff className="w-4.5 h-4.5" />}
+          {isListening ? <Mic className="w-5 h-5" /> : <MicOff className="w-5 h-5" />}
         </button>
 
         {/* Send Button */}
@@ -598,7 +598,7 @@ export default function VectorAdvisoryPanel({
           type="submit"
           className="p-2.5 bg-primary-600 hover:bg-primary-500 text-white rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center animate-pulse-glow"
         >
-          <Send className="w-4.5 h-4.5" />
+          <Send className="w-5 h-5" />
         </button>
       </form>
     </div>

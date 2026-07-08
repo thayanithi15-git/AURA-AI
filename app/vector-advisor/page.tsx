@@ -137,9 +137,9 @@ export default function Home() {
 
 
   return (
-    <main className="min-h-screen bg-[#f8fafc] text-[#0f172a] dark:bg-[#0b111e] dark:text-[#f8fafc] flex flex-col relative overflow-hidden font-sans">
+    <main className="min-h-screen bg-[#f8fafc] text-[#0f172a] dark:bg-[#0a0a0a] dark:text-[#f8fafc] flex flex-col relative lg:overflow-hidden overflow-x-hidden overflow-y-auto font-sans">
       {/* Dynamic background grid effect */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-60 pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-60 pointer-events-none" />
 
       {/* Main Header */}
       <header className="w-full px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md flex items-center justify-between z-20 shadow-sm">
@@ -281,7 +281,7 @@ export default function Home() {
       </header>
 
       {/* Main Section */}
-      <div className="flex-1 w-full max-w-7xl mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 z-10 overflow-hidden lg:h-[calc(100vh-160px)] lg:max-h-[660px]">
+      <div className="flex-1 w-full max-w-7xl mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 z-10 lg:overflow-hidden overflow-y-visible h-auto lg:h-[calc(100vh-160px)] lg:max-h-[660px]">
 
         {/* Left Column: Fullscreen AI Avatar display */}
         <div className="lg:col-span-5 flex flex-col justify-between items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 min-h-[450px] lg:h-full group shadow-lg dark:shadow-black/30">
