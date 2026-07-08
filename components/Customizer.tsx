@@ -81,16 +81,16 @@ export default function Customizer({
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-y-0 right-0 w-full sm:w-[400px] bg-white border-l border-slate-200 z-50 shadow-2xl flex flex-col transition-all duration-300 animate-in slide-in-from-right font-sans">
+    <div className="fixed inset-y-0 right-0 w-full sm:w-[400px] bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 z-50 shadow-2xl flex flex-col transition-all duration-300 animate-in slide-in-from-right font-sans">
       {/* Header */}
-      <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+      <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Settings className="w-5 h-5 text-primary-600 animate-spin-slow" />
-          <h2 className="text-lg font-bold tracking-tight text-slate-800">Avatar Customizer</h2>
+          <h2 className="text-lg font-bold tracking-tight text-slate-800 dark:text-slate-100">Avatar Customizer</h2>
         </div>
         <button 
           onClick={onClose}
-          className="p-1.5 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-slate-600 transition-colors"
+          className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
         >
           <X className="w-5 h-5" />
         </button>

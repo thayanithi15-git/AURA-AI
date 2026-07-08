@@ -101,3 +101,43 @@ body {
   transform-origin: center bottom;
 }
 
+/* Dark theme variables */
+.dark {
+  --background: #0b111e;
+  --foreground: #f8fafc;
+}
+
+/* Smooth background and text changes */
+.theme-transition,
+.theme-transition *,
+body, main, header, div, section, button, p, span, h1, h2, h3, h4, select, input, textarea {
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Document View Transition for top-right to bottom-left reveal */
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  display: block;
+}
+
+/* The new snapshot animates as a circle scaling up from top right (100% 0%) */
+::view-transition-new(root) {
+  animation: reveal-theme 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes reveal-theme {
+  from {
+    clip-path: circle(0% at 100% 0%);
+  }
+  to {
+    clip-path: circle(150% at 100% 0%);
+  }
+}
+
+

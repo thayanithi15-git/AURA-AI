@@ -557,7 +557,7 @@ export default function AdvisoryPanel({
       })
 
       return (
-        <div className="mt-4 p-4 bg-white rounded-2xl border border-slate-200 flex flex-col md:flex-row items-center gap-4">
+        <div className="mt-4 p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center gap-4">
           <div className="relative w-28 h-28 flex-shrink-0">
             <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
               {coordinates.map((path, idx) => (
@@ -568,12 +568,12 @@ export default function AdvisoryPanel({
                   className="transition-all duration-300 hover:opacity-85"
                 />
               ))}
-              <circle cx="50" cy="50" r="22" fill="#ffffff" />
+              <circle cx="50" cy="50" r="22" fill="currentColor" className="text-white dark:text-slate-900 transition-all duration-500" />
             </svg>
           </div>
           <div className="flex-1 grid grid-cols-2 gap-2 text-xs">
             {chart.labels.map((lbl, idx) => (
-              <div key={idx} className="flex items-center gap-1.5 text-slate-600">
+              <div key={idx} className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400">
                 <span
                   className="w-2.5 h-2.5 rounded-full"
                   style={{ backgroundColor: chart.colors?.[idx] }}
@@ -591,16 +591,16 @@ export default function AdvisoryPanel({
     if (chart.type === 'bar') {
       const maxValue = Math.max(...chart.values)
       return (
-        <div className="mt-4 p-4 bg-white rounded-2xl border border-slate-200 space-y-3">
+        <div className="mt-4 p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
           {chart.labels.map((lbl, idx) => {
             const pct = (chart.values[idx] / maxValue) * 100
             return (
               <div key={idx} className="space-y-1">
-                <div className="flex justify-between text-xs font-semibold text-slate-700">
+                <div className="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
                   <span>{lbl}</span>
-                  <span className="text-primary-600 font-bold">{chart.values[idx]}%</span>
+                  <span className="text-primary-600 dark:text-primary-400 font-bold">{chart.values[idx]}%</span>
                 </div>
-                <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                <div className="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{
@@ -627,12 +627,12 @@ export default function AdvisoryPanel({
         .join(' ')
 
       return (
-        <div className="mt-4 p-4 bg-white rounded-2xl border border-slate-200">
+        <div className="mt-4 p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
           <div className="h-32 w-full">
             <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible" preserveAspectRatio="none">
-              <line x1="5" y1="10" x2="95" y2="10" stroke="#e2e8f0" strokeWidth="0.5" strokeDasharray="3" />
-              <line x1="5" y1="50" x2="95" y2="50" stroke="#e2e8f0" strokeWidth="0.5" strokeDasharray="3" />
-              <line x1="5" y1="90" x2="95" y2="90" stroke="#e2e8f0" strokeWidth="0.5" strokeDasharray="3" />
+              <line x1="5" y1="10" x2="95" y2="10" stroke="currentColor" className="text-slate-200 dark:text-slate-800 transition-all duration-500" strokeWidth="0.5" strokeDasharray="3" />
+              <line x1="5" y1="50" x2="95" y2="50" stroke="currentColor" className="text-slate-200 dark:text-slate-800 transition-all duration-500" strokeWidth="0.5" strokeDasharray="3" />
+              <line x1="5" y1="90" x2="95" y2="90" stroke="currentColor" className="text-slate-200 dark:text-slate-800 transition-all duration-500" strokeWidth="0.5" strokeDasharray="3" />
               <polyline
                 fill="none"
                 stroke={chart.colors?.[0] || '#10b981'}
@@ -648,16 +648,17 @@ export default function AdvisoryPanel({
                     key={i}
                     cx={x}
                     cy={y}
-                    r="2.5"
-                    fill="#06b6d4"
-                    stroke="#ffffff"
-                    strokeWidth="0.75"
+                    r="3"
+                    fill="currentColor"
+                    className="text-white dark:text-slate-900 transition-all duration-500"
+                    stroke={chart.colors?.[0] || '#10b981'}
+                    strokeWidth="1.5"
                   />
                 )
               })}
             </svg>
           </div>
-          <div className="flex justify-between text-[10px] text-slate-500 mt-2 font-medium">
+          <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 mt-2 font-medium">
             {chart.labels.map((lbl, idx) => (
               <span key={idx}>{lbl}</span>
             ))}
@@ -675,19 +676,19 @@ export default function AdvisoryPanel({
   }
 
   return (
-    <div className="flex flex-col h-full bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-lg font-sans">
+    <div className="flex flex-col h-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-lg font-sans">
       {/* Top Status Bar */}
-      <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+      <div className="px-6 py-4 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="relative">
-            <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white animate-pulse" />
-            <div className="w-10 h-10 rounded-xl bg-primary-50 border border-primary-100 flex items-center justify-center text-primary-600">
-              <Bot className="w-5 h-5 text-primary-600" />
+            <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white dark:border-slate-950 animate-pulse" />
+            <div className="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-950/20 border border-primary-100 dark:border-primary-900/50 flex items-center justify-center text-primary-600 dark:text-primary-400">
+              <Bot className="w-5 h-5 text-primary-600 dark:text-primary-400" />
             </div>
           </div>
           <div>
-            <h3 className="font-bold text-slate-800 text-sm tracking-wide">AURA Advisory Core</h3>
-            <p className="text-[11px] text-emerald-600 font-semibold">
+            <h3 className="font-bold text-slate-800 dark:text-slate-100 text-sm tracking-wide">AURA Advisory Core</h3>
+            <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">
               {apiKey ? `${aiProvider === 'both' ? 'Gemini + Groq' : aiProvider === 'groq' ? 'Groq' : 'Gemini'} Mode Synced` : 'Offline Mode (Presets)'}
             </p>
           </div>
@@ -703,8 +704,8 @@ export default function AdvisoryPanel({
             }}
             className={`p-2 rounded-xl border transition-all duration-200 ${
               isVoiceMuted
-                ? 'bg-rose-50 border border-rose-200 text-rose-600 hover:bg-rose-100'
-                : 'bg-primary-50 border border-primary-200 text-primary-600 hover:bg-primary-100'
+                ? 'bg-rose-50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/50 text-rose-600 dark:text-rose-450 hover:bg-rose-100 dark:hover:bg-rose-900/40'
+                : 'bg-primary-50 dark:bg-primary-950/20 border border-primary-200 dark:border-primary-900/50 text-primary-600 dark:text-primary-450 hover:bg-primary-100 dark:hover:bg-primary-900/40'
             }`}
             title={isVoiceMuted ? 'Unmute Voice output' : 'Mute Voice output'}
           >
@@ -714,7 +715,7 @@ export default function AdvisoryPanel({
       </div>
 
       {/* Messages thread */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50/50">
+      <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50/50 dark:bg-slate-950/10">
         {messages.map((msg) => (
           <div
             key={msg.id}
@@ -725,8 +726,8 @@ export default function AdvisoryPanel({
             <div
               className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center border text-xs font-semibold ${
                 msg.sender === 'user'
-                  ? 'bg-slate-100 border-slate-200 text-slate-600'
-                  : 'bg-primary-50 border border-primary-100 text-primary-600'
+                  ? 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
+                  : 'bg-primary-50 dark:bg-primary-950/20 border border-primary-100 dark:border-primary-900/50 text-primary-600 dark:text-primary-450'
               }`}
             >
               {msg.sender === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
@@ -737,13 +738,13 @@ export default function AdvisoryPanel({
                 className={`p-4 rounded-2xl ${
                   msg.sender === 'user'
                     ? 'bg-primary-600 text-white rounded-tr-none'
-                    : 'bg-white border border-slate-200 text-slate-800 rounded-tl-none shadow-sm'
+                    : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 rounded-tl-none shadow-sm'
                 }`}
               >
                 <p className="text-xs font-medium leading-relaxed whitespace-pre-wrap">{msg.text}</p>
                 {msg.chartData && renderChart(msg.chartData)}
               </div>
-              <span className="text-[10px] text-slate-400 mt-1 block px-1">{msg.timestamp}</span>
+              <span className="text-[10px] text-slate-400 dark:text-slate-500 mt-1 block px-1">{msg.timestamp}</span>
             </div>
           </div>
         ))}
@@ -751,24 +752,24 @@ export default function AdvisoryPanel({
       </div>
 
       {/* Preset Recommendations */}
-      <div className="px-6 py-3 bg-slate-50 border-t border-slate-100 flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-none">
+      <div className="px-6 py-3 bg-slate-50 dark:bg-slate-950 border-t border-slate-100 dark:border-slate-850 flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-none">
         <button
           onClick={() => triggerPreset('How is my spending habits?')}
-          className="text-xs font-semibold bg-white hover:bg-slate-50 border border-slate-200 text-slate-600 hover:text-slate-900 py-1.5 px-3 rounded-full flex items-center gap-1.5 transition-all shadow-sm"
+          className="text-xs font-semibold bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 py-1.5 px-3 rounded-full flex items-center gap-1.5 transition-all shadow-sm"
         >
           <BarChart3 className="w-3.5 h-3.5 text-rose-500" />
           <span>Analyze Spending</span>
         </button>
         <button
           onClick={() => triggerPreset('Recommend an investment portfolio')}
-          className="text-xs font-semibold bg-white hover:bg-slate-50 border border-slate-200 text-slate-600 hover:text-slate-900 py-1.5 px-3 rounded-full flex items-center gap-1.5 transition-all shadow-sm"
+          className="text-xs font-semibold bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 py-1.5 px-3 rounded-full flex items-center gap-1.5 transition-all shadow-sm"
         >
           <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
           <span>Investment Portfolio</span>
         </button>
         <button
           onClick={() => triggerPreset('Show my wealth growth projection')}
-          className="text-xs font-semibold bg-white hover:bg-slate-50 border border-slate-200 text-slate-600 hover:text-slate-900 py-1.5 px-3 rounded-full flex items-center gap-1.5 transition-all shadow-sm"
+          className="text-xs font-semibold bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 py-1.5 px-3 rounded-full flex items-center gap-1.5 transition-all shadow-sm"
         >
           <DollarSign className="w-3.5 h-3.5 text-yellow-500" />
           <span>Future Net Worth</span>
@@ -776,7 +777,7 @@ export default function AdvisoryPanel({
       </div>
 
       {/* Input controls form */}
-      <form onSubmit={handleSend} className="p-4 bg-white border-t border-slate-200 flex items-center gap-3">
+      <form onSubmit={handleSend} className="p-4 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-850 flex items-center gap-3">
         {/* Voice recording mic button */}
         <button
           type="button"
@@ -784,7 +785,7 @@ export default function AdvisoryPanel({
           className={`p-3 rounded-xl border transition-all duration-200 ${
             isListening
               ? 'bg-rose-600 border-rose-500 text-white animate-pulse'
-              : 'bg-slate-50 border-slate-200 text-slate-500 hover:text-slate-800 hover:bg-slate-100'
+              : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-slate-800 hover:bg-slate-100 dark:hover:bg-slate-850'
           }`}
           title={isListening ? 'Stop Listening' : 'Speak into Microphone'}
         >
@@ -796,7 +797,7 @@ export default function AdvisoryPanel({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={isListening ? 'Listening to voice...' : 'Ask AURA about wealth, savings, portfolios...'}
-          className="flex-1 py-3 px-4 bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary-500 focus:ring-1 focus:ring-primary-500 rounded-xl text-xs font-medium text-slate-800 placeholder-slate-400 outline-none transition-all"
+          className="flex-1 py-3 px-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:bg-white dark:focus:bg-slate-850 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 rounded-xl text-xs font-medium text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all"
         />
 
         <button

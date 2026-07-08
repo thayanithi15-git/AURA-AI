@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { Settings, Sparkles, RefreshCw, ChevronDown, Globe, Check } from 'lucide-react'
+import { Settings, Sparkles, RefreshCw, ChevronDown, Globe, Check, Sun, Moon } from 'lucide-react'
 import Avatar from '../components/Avatar'
 import Customizer, { CustomizerSettings } from '../components/Customizer'
 import AdvisoryPanel from '../components/AdvisoryPanel'
@@ -17,6 +17,49 @@ export default function Home() {
   const [didSessionId, setDidSessionId] = useState<string>('')
   const [langDropdownOpen, setLangDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const [isDarkMode, setIsDarkMode] = useState(false)
+
+  // Initialize theme from localStorage or system preference
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedTheme = localStorage.getItem('theme')
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      const useDark = storedTheme === 'dark' || (!storedTheme && systemPrefersDark)
+      setIsDarkMode(useDark)
+      if (useDark) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    }
+  }, [])
+
+  const toggleDarkMode = () => {
+    const nextMode = !isDarkMode
+    
+    // Smooth circle reveal transition from top right to bottom left
+    if (typeof document !== 'undefined' && (document as any).startViewTransition) {
+      (document as any).startViewTransition(() => {
+        setIsDarkMode(nextMode)
+        if (nextMode) {
+          document.documentElement.classList.add('dark')
+          localStorage.setItem('theme', 'dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+          localStorage.setItem('theme', 'light')
+        }
+      })
+    } else {
+      setIsDarkMode(nextMode)
+      if (nextMode) {
+        document.documentElement.classList.add('dark')
+        localStorage.setItem('theme', 'dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+        localStorage.setItem('theme', 'light')
+      }
+    }
+  }
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -94,40 +137,40 @@ export default function Home() {
 
 
   return (
-    <main className="min-h-screen bg-[#f8fafc] text-[#0f172a] flex flex-col relative overflow-hidden font-sans">
+    <main className="min-h-screen bg-[#f8fafc] text-[#0f172a] dark:bg-[#0b111e] dark:text-[#f8fafc] flex flex-col relative overflow-hidden font-sans">
       {/* Dynamic background grid effect */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-60 pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-60 pointer-events-none" />
 
       {/* Main Header */}
-      <header className="w-full px-6 py-4 border-b border-slate-200 bg-white/80 backdrop-blur-md flex items-center justify-between z-20 shadow-sm">
+      <header className="w-full px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md flex items-center justify-between z-20 shadow-sm">
         <div className="flex items-center gap-3">
-          <img src="/logo.png" alt="AURA Logo" className="w-8 h-8 rounded-lg object-contain shadow-sm border border-slate-100" />
+          <img src="/logo.png" alt="AURA Logo" className="w-8 h-8 rounded-lg object-contain shadow-sm border border-slate-100 dark:border-slate-800" />
           <div>
             <div className="flex items-center gap-1.5">
-              <h1 className="font-extrabold text-lg tracking-wider text-slate-800">
+              <h1 className="font-extrabold text-lg tracking-wider text-slate-800 dark:text-slate-100">
                 AURA
               </h1>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-primary-600 bg-primary-50 px-1.5 py-0.5 rounded border border-primary-200">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-primary-600 bg-primary-50 px-1.5 py-0.5 rounded border border-primary-200 dark:bg-primary-950/30 dark:text-primary-400 dark:border-primary-800">
                 Wealth v1.2
               </span>
             </div>
-            <p className="text-[11px] text-slate-500 font-medium">Digital Wealth Management Advisory</p>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Digital Wealth Management Advisory</p>
           </div>
         </div>
 
         {/* Action Controls */}
         <div className="flex items-center gap-3">
           {/* Quick Stats (Desktop) */}
-          <div className="hidden md:flex items-center gap-4 text-xs font-semibold px-4 py-2 bg-white border border-slate-200 rounded-xl shadow-sm text-slate-600">
+          <div className="hidden md:flex items-center gap-4 text-xs font-semibold px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm text-slate-600 dark:text-slate-300">
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              <span className="text-slate-400 font-medium">Portfolio:</span>
-              <span className="text-slate-800">$84,320</span>
+              <span className="text-slate-400 dark:text-slate-500 font-medium">Portfolio:</span>
+              <span className="text-slate-800 dark:text-slate-200">$84,320</span>
             </div>
-            <div className="w-px h-3 bg-slate-200" />
+            <div className="w-px h-3 bg-slate-200 dark:bg-slate-800" />
             <div className="flex items-center gap-1.5">
-              <span className="text-slate-400 font-medium">Status:</span>
-              <span className="text-emerald-600 font-medium">Balanced Growth</span>
+              <span className="text-slate-400 dark:text-slate-500 font-medium">Status:</span>
+              <span className="text-emerald-600 dark:text-emerald-400 font-medium">Balanced Growth</span>
             </div>
           </div>
 
@@ -135,7 +178,7 @@ export default function Home() {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-              className="flex h-9 w-[180px] items-center justify-between rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none transition-all active:scale-[0.98]"
+              className="flex h-9 w-[180px] items-center justify-between rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-850 focus:outline-none transition-all active:scale-[0.98]"
             >
               <span className="truncate">
                 {settings.language === 'en' && 'English (US/UK)'}
@@ -149,7 +192,7 @@ export default function Home() {
 
             {langDropdownOpen && (
               /* Shadcn Select Content Dropdown */
-              <div className="absolute right-0 mt-1 w-[180px] rounded-lg border border-slate-200 bg-white p-1 text-slate-950 shadow-md ring-1 ring-black/5 animate-in fade-in-80 slide-in-from-top-1 duration-100 origin-top-right z-40">
+              <div className="absolute right-0 mt-1 w-[180px] rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-1 text-slate-950 dark:text-slate-50 shadow-md ring-1 ring-black/5 dark:ring-white/5 animate-in fade-in-80 slide-in-from-top-1 duration-100 origin-top-right z-40">
                   {[
                     { code: 'en', label: 'English (US/UK)' },
                     { code: 'hi', label: 'Hindi (हिंदी)' },
@@ -167,13 +210,13 @@ export default function Home() {
                         }}
                         className={`relative flex w-full cursor-pointer select-none items-center rounded-md py-1.5 pl-8 pr-2 text-xs font-semibold outline-none transition-colors ${
                           active 
-                            ? 'bg-slate-100 text-slate-900' 
-                            : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                            ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-50' 
+                            : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-slate-50'
                         }`}
                       >
                         {active && (
                           <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-                            <Check className="h-3.5 w-3.5 text-slate-900" />
+                            <Check className="h-3.5 w-3.5 text-slate-900 dark:text-slate-100" />
                           </span>
                         )}
                         <span>{lang.label}</span>
@@ -189,7 +232,7 @@ export default function Home() {
             onClick={checkDIDStatus}
             disabled={checkingDID}
             suppressHydrationWarning={true}
-            className="flex items-center gap-2 px-3 py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-semibold rounded-xl transition-all shadow-sm text-slate-700 active:scale-95 disabled:opacity-50"
+            className="flex items-center gap-2 px-3 py-2.5 bg-slate-50 hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 text-xs font-semibold rounded-xl transition-all shadow-sm text-slate-700 dark:text-slate-200 active:scale-95 disabled:opacity-50"
             title="Check if D-ID is taking customized face avatar"
           >
             <RefreshCw className={`w-3.5 h-3.5 text-primary-500 ${checkingDID ? 'animate-spin' : ''}`} />
@@ -199,10 +242,19 @@ export default function Home() {
           <button
             onClick={() => setCustomizerOpen(true)}
             suppressHydrationWarning={true}
-            className="flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-slate-50 border border-slate-200 text-sm font-semibold rounded-xl transition-all shadow-sm text-slate-700 active:scale-95"
+            className="flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 text-sm font-semibold rounded-xl transition-all shadow-sm text-slate-700 dark:text-slate-200 active:scale-95"
           >
             <Settings className="w-4 h-4 text-primary-500" />
             <span>Customize Face</span>
+          </button>
+
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleDarkMode}
+            className="flex items-center justify-center w-9 h-9 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-850 shadow-sm text-slate-700 dark:text-slate-200 active:scale-95 transition-all"
+            title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          >
+            {isDarkMode ? <Sun className="w-4.5 h-4.5 text-amber-500" /> : <Moon className="w-4.5 h-4.5 text-indigo-500" />}
           </button>
         </div>
       </header>
@@ -210,18 +262,17 @@ export default function Home() {
       {/* Main Section */}
       <div className="flex-1 w-full max-w-7xl mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 z-10 overflow-hidden lg:h-[calc(100vh-160px)] lg:max-h-[660px]">
         
-        {/* Left Column: Fullscreen AI Avatar display (takes 5 columns to keep it reasonably sized) */}
-        {/* Left Column: Fullscreen AI Avatar display (takes 5 columns to keep it reasonably sized) */}
-        <div className="lg:col-span-5 flex flex-col justify-between items-center bg-white border border-slate-200 rounded-3xl p-6 min-h-[450px] lg:h-full group shadow-lg">
+        {/* Left Column: Fullscreen AI Avatar display */}
+        <div className="lg:col-span-5 flex flex-col justify-between items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 min-h-[450px] lg:h-full group shadow-lg dark:shadow-black/30">
           {/* Top Row: Scientific HUD info & Secure Link */}
           <div className="w-full flex justify-between items-center mb-4">
-            <div className="text-[10px] text-slate-400 font-mono space-y-1">
+            <div className="text-[10px] text-slate-400 dark:text-slate-500 font-mono space-y-1">
               <div>SYS.LOC: DIGITAL_CORE</div>
               <div>STATUS: {isSpeaking ? "ACTIVE_TRANSMITTING" : "MONITORING_INPUT"}</div>
               <div>HOLOGRAPHIC_AVATAR: ONLINE</div>
             </div>
             
-            <div className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 border border-emerald-100 rounded-lg text-[9px] font-bold text-emerald-600">
+            <div className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-100 dark:border-emerald-900/50 rounded-lg text-[9px] font-bold text-emerald-600 dark:text-emerald-400">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span>SECURE LINK</span>
             </div>
@@ -246,13 +297,13 @@ export default function Home() {
           {/* Bottom Area: Stack Subtitles and Stats static / responsive */}
           <div className="w-full space-y-4">
             {/* Captions / Subtitles bar */}
-            <div className="w-full min-h-[4rem] flex items-center justify-center text-center px-4 py-2.5 bg-slate-50/90 border border-slate-200 rounded-2xl backdrop-blur-md shadow-sm">
+            <div className="w-full min-h-[4rem] flex items-center justify-center text-center px-4 py-2.5 bg-slate-50/90 border border-slate-200 dark:bg-slate-950/90 dark:border-slate-800 rounded-2xl backdrop-blur-md shadow-sm">
               {subtitle ? (
-                <p className="text-sm font-semibold text-slate-800 tracking-wide leading-relaxed animate-pulse">
+                <p className="text-sm font-semibold text-slate-800 dark:text-slate-100 tracking-wide leading-relaxed animate-pulse">
                   "{subtitle}"
                 </p>
               ) : (
-                <p className="text-xs text-slate-400 italic font-mono uppercase tracking-widest">
+                <p className="text-xs text-slate-400 dark:text-slate-500 italic font-mono uppercase tracking-widest">
                   AURA System Ready &amp; Idle
                 </p>
               )}
@@ -260,17 +311,17 @@ export default function Home() {
 
             {/* Interactive stats overlay */}
             <div className="grid grid-cols-3 gap-3">
-              <div className="p-3 bg-slate-50/70 border border-slate-200/60 rounded-2xl text-center backdrop-blur-md">
-                <span className="text-[10px] text-slate-400 block mb-0.5">Customization</span>
-                <span className="text-xs font-bold text-slate-700 capitalize">{settings.hairStyle} / Theme</span>
+              <div className="p-3 bg-slate-50/70 border border-slate-200/60 dark:bg-slate-950/70 dark:border-slate-800/60 rounded-2xl text-center backdrop-blur-md">
+                <span className="text-[10px] text-slate-400 dark:text-slate-500 block mb-0.5">Customization</span>
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-200 capitalize">{settings.hairStyle} / Theme</span>
               </div>
-              <div className="p-3 bg-slate-50/70 border border-slate-200/60 rounded-2xl text-center backdrop-blur-md">
-                <span className="text-[10px] text-slate-400 block mb-0.5">Interface</span>
-                <span className="text-xs font-bold text-slate-700">{settings.avatarSource === 'did' ? 'D-ID Stream' : 'Interactive SVG'}</span>
+              <div className="p-3 bg-slate-50/70 border border-slate-200/60 dark:bg-slate-950/70 dark:border-slate-800/60 rounded-2xl text-center backdrop-blur-md">
+                <span className="text-[10px] text-slate-400 dark:text-slate-500 block mb-0.5">Interface</span>
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-200">{settings.avatarSource === 'did' ? 'D-ID Stream' : 'Interactive SVG'}</span>
               </div>
-              <div className="p-3 bg-slate-50/70 border border-slate-200/60 rounded-2xl text-center backdrop-blur-md">
-                <span className="text-[10px] text-slate-400 block mb-0.5">Voice Synth</span>
-                <span className="text-xs font-bold text-slate-700">{settings.voiceRate}x rate</span>
+              <div className="p-3 bg-slate-50/70 border border-slate-200/60 dark:bg-slate-950/70 dark:border-slate-800/60 rounded-2xl text-center backdrop-blur-md">
+                <span className="text-[10px] text-slate-400 dark:text-slate-500 block mb-0.5">Voice Synth</span>
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-200">{settings.voiceRate}x rate</span>
               </div>
             </div>
           </div>
