@@ -113,11 +113,11 @@ export default function VectorAdvisorPage() {
       {/* Main Header */}
       <header className="w-full px-4 py-3 md:px-6 md:py-4 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md flex items-center justify-between z-20 shadow-sm">
         <div className="flex items-center gap-2 md:gap-3">
-          <img src="/logo.png" alt="AURA Logo" className="w-10 h-10 md:w-12 md:h-12 rounded-lg object-contain shadow-sm border border-slate-100 dark:border-slate-800" />
+          <img src="/logo.png" alt="ARTHA AI Logo" className="w-10 h-10 md:w-12 md:h-12 rounded-lg object-contain shadow-sm border border-slate-100 dark:border-slate-800" />
           <div>
             <div className="flex items-center gap-1.5">
               <h1 className="font-extrabold text-base md:text-lg tracking-wider text-slate-800 dark:text-slate-100">
-                AURA
+                ARTHA AI
               </h1>
               <span className="text-[9px] md:text-[10px] uppercase font-bold tracking-widest text-primary-600 bg-primary-50 px-1.5 py-0.5 rounded border border-primary-200 dark:bg-primary-950/30 dark:text-primary-400 dark:border-primary-800">
                 Core v1.2
@@ -372,7 +372,7 @@ export default function VectorAdvisorPage() {
                 </p>
               ) : (
                 <p className="text-xs text-slate-400 dark:text-slate-500 italic font-mono uppercase tracking-widest">
-                  AURA System Ready &amp; Idle
+                  ARTHA AI System Ready &amp; Idle
                 </p>
               )}
             </div>

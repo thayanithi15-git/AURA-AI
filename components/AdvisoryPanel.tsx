@@ -39,7 +39,7 @@ interface AdvisoryPanelProps {
 
 const WEALTH_BOT_RESPONSES: Record<string, { reply: string; chart?: Message['chartData'] }> = {
   default: {
-    reply: "I am AURA, mhe tumara dost hu . How can I help you optimize your wealth today? You can ask me to analyze your spending habits, suggest investment portfolios, or explain wealth strategies.",
+    reply: "I am ARTHA AI, mhe tumara dost hu . How can I help you optimize your wealth today? You can ask me to analyze your spending habits, suggest investment portfolios, or explain wealth strategies.",
   },
   spending: {
     reply: "Analyzing your transaction flow: You spent $4,200 last month. Your core essentials (rent, bills) accounted for 45%, lifestyle & dining for 38% (which is 8% above average), and savings was only 17%. I recommend shifting $300/month from dining to your investment portfolio to maximize compounding interest.",
@@ -449,7 +449,7 @@ export default function AdvisoryPanel({
           const botMessagePlaceholder: Message = {
             id: botPlaceholderId,
             sender: 'bot',
-            text: "AURA is preparing video advisor response...",
+            text: "ARTHA AI is preparing video advisor response...",
             timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
           }
           setMessages((prev) => [...prev, botMessagePlaceholder])
@@ -474,14 +474,47 @@ export default function AdvisoryPanel({
         onHeadAnimationChange('shake')
         setTimeout(() => onHeadAnimationChange('idle'), 1000)
 
-        const errMsg: Message = {
-          id: (Date.now() + 1).toString(),
-          sender: 'bot',
-          text: `I encountered an error querying the ${aiProvider === 'both' ? 'AI providers' : aiProvider === 'groq' ? 'Groq API' : 'Gemini API'}. Please make sure your API key is correct and valid.`,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        // Fallback to local response instead of showing error
+        const lower = messageText.toLowerCase()
+        let key = 'default'
+        if (lower.includes('spend') || lower.includes('expense') || lower.includes('habit')) {
+          key = 'spending'
+        } else if (lower.includes('invest') || lower.includes('portfolio') || lower.includes('stock')) {
+          key = 'portfolio'
+        } else if (lower.includes('project') || lower.includes('growth') || lower.includes('future')) {
+          key = 'projection'
+        } else if (lower.includes('budget') || lower.includes('save') || lower.includes('saving')) {
+          key = 'budget'
         }
-        setMessages((prev) => [...prev, errMsg])
-        speakText("I encountered an error querying the API. Please check your key.")
+
+        const fallbackResponse = WEALTH_BOT_RESPONSES[key]
+        const botPlaceholderId = (Date.now() + 1).toString()
+
+        if (avatarSource === 'did') {
+          const botMessagePlaceholder: Message = {
+            id: botPlaceholderId,
+            sender: 'bot',
+            text: "ARTHA AI is preparing video advisor response...",
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          }
+          setMessages((prev) => [...prev, botMessagePlaceholder])
+          setPendingMessage({
+            id: botPlaceholderId,
+            text: fallbackResponse.reply,
+            chartData: fallbackResponse.chart
+          })
+          speakText(fallbackResponse.reply, botPlaceholderId, fallbackResponse.chart)
+        } else {
+          const botMessage: Message = {
+            id: botPlaceholderId,
+            sender: 'bot',
+            text: fallbackResponse.reply,
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            chartData: fallbackResponse.chart,
+          }
+          setMessages((prev) => [...prev, botMessage])
+          speakText(fallbackResponse.reply)
+        }
       }
     } else {
       setTimeout(() => {
@@ -687,7 +720,7 @@ export default function AdvisoryPanel({
             </div>
           </div>
           <div>
-            <h3 className="font-bold text-slate-800 dark:text-slate-100 text-sm tracking-wide">AURA Advisory Core</h3>
+            <h3 className="font-bold text-slate-800 dark:text-slate-100 text-sm tracking-wide">ARTHA AI Advisory Core</h3>
             <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">
               {apiKey ? `${aiProvider === 'both' ? 'Gemini + Groq' : aiProvider === 'groq' ? 'Groq' : 'Gemini'} Mode Synced` : 'Offline Mode (Presets)'}
             </p>
@@ -796,7 +829,7 @@ export default function AdvisoryPanel({
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder={isListening ? 'Listening to voice...' : 'Ask AURA about wealth, savings, portfolios...'}
+          placeholder={isListening ? 'Listening to voice...' : 'Ask ARTHA AI about wealth, savings, portfolios...'}
           className="flex-1 min-w-0 py-3 px-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:bg-white dark:focus:bg-slate-850 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 rounded-xl text-xs font-medium text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all"
         />
 

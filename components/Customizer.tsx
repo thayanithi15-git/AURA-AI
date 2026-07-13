@@ -137,7 +137,7 @@ export default function Customizer({
             </div>
             <div className="space-y-2">
               <p className="text-[11px] font-medium text-slate-600 dark:text-slate-400 leading-relaxed">
-                AURA is synced with D-ID's video generation engine. When you send messages, AURA will automatically speak and generate realistic talking video animations.
+                ARTHA AI is synced with D-ID's video generation engine. When you send messages, ARTHA AI will automatically speak and generate realistic talking video animations.
               </p>
               {settings.didVideoUrl && (
                 <div className="mt-2 p-2.5 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-100 dark:border-emerald-900/50 rounded-lg text-[10px] text-emerald-700 dark:text-emerald-400 font-mono break-all">
@@ -332,7 +332,7 @@ export default function Customizer({
           </div>
 
           <div className="space-y-2">
-            <label className="block text-xs font-bold text-slate-50500 dark:text-slate-400">Language (AURA Output)</label>
+            <label className="block text-xs font-bold text-slate-50500 dark:text-slate-400">Language (ARTHA AI Output)</label>
             <div className="grid grid-cols-2 gap-2">
               {[
                 { code: 'en', label: 'English', flag: '🇺🇸' },

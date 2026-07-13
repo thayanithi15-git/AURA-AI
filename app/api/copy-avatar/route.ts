@@ -15,7 +15,7 @@ export async function GET() {
       }
     })
     const data = await response.json()
-    const agentName = data.preview_name || data.preview?.name || data.name || 'AURA Agent'
+    const agentName = data.preview_name || data.preview?.name || data.name || 'ARTHA AI Agent'
 
     return NextResponse.json({
       success: true,
